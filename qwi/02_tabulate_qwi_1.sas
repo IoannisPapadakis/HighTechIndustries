@@ -3,7 +3,7 @@
 
 
 %let qwivars=b e f ca cs jc jd;
-%let qwistates=ca wi ny;
+/*%let qwistates=ca wi ny;*/
 %let qwisuffix=sa_f_gs_n4_op_u;
 
 /* read ID vars */
@@ -25,10 +25,12 @@ quit;
 /* create national view */
 *options mprint symbolgen;
 
+%mk_qwi_us(states=mi wy,qwibase=&qwibasewy.);
 %mk_qwi_us(states=all,qwibase=&qwibase.);
+libname qwi_us (qwi_us, qwi_mi, qwi_wy);
 %mk_qwi_us_dataset(states=all,view=yes,qwilib=qwi_us,suffix=&qwisuffix.);
 
-data INTERWRK.qwi_us_&qwisuffix.
+data INTERWRK.qwi_us_&qwisuffix. 
 	(keep=&qwi_ids &qwivars.);
 	set qwi_us_&qwisuffix.;
 	rename
@@ -49,7 +51,7 @@ run;
 proc summary data=sum_input(where=(geo_level="S")) nway;
 class &qwi_ids.;
 var &qwivars.;
-output out=INTERWRK.sum_qwi_us mean=&qwivars. ;
+output out=INTERWRK.sum_qwi_us sum=&qwivars. ;
 run;
 
 /* create rates */
