@@ -44,15 +44,21 @@ run;
 /* work around */
 data sum_input / view=sum_input;
 	set INTERWRK.qwi_us_&qwisuffix.;
-	if geo_level="S" then geography = "S";
+        /* the geography will say that 00=US is the relevant geocode
+           we leave geo_level=S to indicate that this is based off
+           a state-level file, and is not a true national-level file */
+	if geo_level="S" then geography = "00";
 run;
 
-
+/* this sum creates a file at the national level, naics=naics4, by all the 
+   variables on the file (see IDs).
+*/
 proc summary data=sum_input(where=(geo_level="S" and ind_level="4")) nway;
 class &qwi_ids.;
 var &qwivars.;
 output out=INTERWRK.sum_qwi_us sum=&qwivars. ;
 run;
+
 
 /* create rates */
 options ERRORS=1;

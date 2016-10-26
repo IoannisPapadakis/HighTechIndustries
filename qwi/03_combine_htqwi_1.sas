@@ -74,7 +74,7 @@ class ht;
 var &qwivars. female;
 run;
 
-proc freq data=HTBASE.qwiht(where=(sex = "0" and agegrp ne "A00"));
+proc freq data=HTBASE.qwiht_us(where=(sex = "0" and agegrp ne "A00"));
 title "Distribution of age groups, weighted by employment, by HT status";
 table agegrp*ht;
 weight b;
