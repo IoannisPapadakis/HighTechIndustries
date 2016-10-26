@@ -48,7 +48,7 @@ data sum_input / view=sum_input;
 run;
 
 
-proc summary data=sum_input(where=(geo_level="S")) nway;
+proc summary data=sum_input(where=(geo_level="S" and ind_level="4")) nway;
 class &qwi_ids.;
 var &qwivars.;
 output out=INTERWRK.sum_qwi_us sum=&qwivars. ;
@@ -72,7 +72,7 @@ data sum_input / view=sum_input;
 	set INTERWRK.qwir_us_&qwisuffix.;
 	if geo_level="S" then geography = "S";
 run;
-proc summary data=sum_input nway;
+proc summary data=sum_input(where=(geo_level="S" and ind_level="4")) nway;
 class &qwi_ids.;
 var jcr jdr csr car;
 weight weight;
