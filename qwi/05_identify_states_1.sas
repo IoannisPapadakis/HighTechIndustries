@@ -1,8 +1,9 @@
-/* run some basic stats by high-tech industries */
+/* This tabulates the state-level, all-all employment - 
+   an easy way to get at availability by state */
+
 %include "config.sas"/source2;
 
 
-%let qwivars=b e f ca cs jc jd;
 %let qwisuffix=sa_f_gs_n4_op_u;
 
 proc sql;
@@ -19,4 +20,9 @@ class &qwi_ids.;
 var e;
 output out=HTBASE.states_&qwisuffix. sum=e ;
 run;
+
+proc export data=HTBASE.states_&qwisuffix. 
+ outfile="&htbase./states_&qwisuffix..csv" dbms=csv replace;
+run;
+
 

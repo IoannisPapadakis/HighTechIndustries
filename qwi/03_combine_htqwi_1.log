@@ -1,4 +1,4 @@
-1                                                          The SAS System                          22:05 Wednesday, October 12, 2016
+1                                                          The SAS System                            23:24 Tuesday, October 25, 2016
 
 NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
 NOTE: SAS (r) Proprietary Software 9.4 (TS1M0) 
@@ -38,8 +38,8 @@ The command line option "-nonews" will prevent this display.
 
 
 NOTE: SAS initialization used:
-      real time           0.03 seconds
-      cpu time            0.02 seconds
+      real time           0.04 seconds
+      cpu time            0.03 seconds
       
 
 NOTE: AUTOEXEC processing beginning; file is /home/fs01/lv39/autoexec.sas.
@@ -49,52 +49,55 @@ NOTE: Libref OPMQA was successfully assigned as follows:
       Physical Name: /home/lv39/Desktop/opm-qa
 NOTE: Libref HERE was successfully assigned as follows: 
       Engine:        V9 
-      Physical Name: /home/lv39/Workspace/git/HighTechIndustries/qwi
+      Physical Name: /home/lv39/Workspace/git/qwiHighTech/qwi
 =========== running on compute-0-4.ecco ============
 
 NOTE: AUTOEXEC processing completed.
 
 1          /* run some basic stats by high-tech industries */
 2          %include "config.sas"/source2;
-NOTE: %INCLUDE (level 1) file config.sas is file /home/lv39/Workspace/git/HighTechIndustries/qwi/config.sas.
+NOTE: %INCLUDE (level 1) file config.sas is file /home/lv39/Workspace/git/qwiHighTech/qwi/config.sas.
 3         +/* configuration file for QWI-HT */
-2 The SAS System                                                                                   22:05 Wednesday, October 12, 2016
+2 The SAS System                                                                                     23:24 Tuesday, October 25, 2016
 
 4         +
 5         +/* adjust to where public-use QWI can be found */
-6         +%let qwibase=/data/clean/qwipu/state/data.R2016Q3/;
-7         +%let schema=4.1-rc2;
-8         +
-9         +/* adjust to where the HT indicators are */
-10        +%let htbase=../data;
-11        +libname HTBASE "&htbase.";
+6         +%let basedir=/data/clean/qwipu/state/;
+7         +%let qwibase=&basedir./data.R2016Q3/;
+8         +%let qwibasewy=&basedir./data.R2014Q4/; /* should be later but for now...*/
+9         +%let qwibasemi=&basedir./data.R2014Q4/; /* should be later but for now...*/
+10        +%let schema=4.1-rc2;
+11        +
+12        +/* adjust to where the HT indicators are */
+13        +%let htbase=../data;
+14        +libname HTBASE "&htbase.";
 NOTE: Libref HTBASE was successfully assigned as follows: 
       Engine:        V9 
-      Physical Name: /home/lv39/Workspace/git/HighTechIndustries/data
-12        +/* where does intermediate data live */
-13        +%let interwrk=/scratch/htqwi;
-14        +x "[[ -d &interwrk. ]] || mkdir -p &interwrk."
-14       !+                                              ;
-15        +libname INTERWRK "&interwrk.";
+      Physical Name: /home/lv39/Workspace/git/qwiHighTech/data
+15        +/* where does intermediate data live */
+16        +%let interwrk=/scratch/htqwi;
+17        +x "[[ -d &interwrk. ]] || mkdir -p &interwrk."
+17       !+                                              ;
+18        +libname INTERWRK "&interwrk.";
 NOTE: Libref INTERWRK was successfully assigned as follows: 
       Engine:        V9 
       Physical Name: /scratch/htqwi
-16        +
-17        +options sasautos= ( !SASAUTOS "./" );
+19        +
+20        +options sasautos= ( !SASAUTOS "./" );
 NOTE: %INCLUDE (level 1) ending.
-18         
-19         
-20         %let qwivars=b e f ca cs jc jd;
-21         %let qwistates=ca wi ny;
-22         %let qwisuffix=sa_f_gs_n4_op_u;
-23         %let us=us;
-24         *let us=sample;
-25         
-26         
-27         filename testurl url "http://lehd.ces.census.gov/data/schema/V&schema./lehd_identifiers_qwi.csv";
+21         
+22         
+23         %let qwivars=b e f ca cs jc jd;
+24         %let qwistates=ca wi ny;
+25         %let qwisuffix=sa_f_gs_n4_op_u;
+26         %let us=us;
+27         *let us=sample;
 28         
-29         proc import file=testurl out=INTERWRK.ids dbms=csv;
-29       !                                                    run;
+29         
+30         filename testurl url "http://lehd.ces.census.gov/data/schema/V&schema./lehd_identifiers_qwi.csv";
+31         
+32         proc import file=testurl out=INTERWRK.ids dbms=csv;
+32       !                                                    run;
 
 NOTE: Import cancelled.  Output dataset INTERWRK.IDS already exists.  Specify REPLACE option to overwrite it.
 NOTE: The SAS System stopped processing this step because of errors.
@@ -104,10 +107,10 @@ NOTE: PROCEDURE IMPORT used (Total process time):
       system cpu time     0.00 seconds
       memory              42.37k
       OS Memory           4760.00k
-      Timestamp           10/12/2016 10:05:13 PM
+      Timestamp           10/25/2016 11:24:59 PM
       Step Count                        1  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     90
+      Page Reclaims                     89
       Page Swaps                        0
       Voluntary Context Switches        0
       Involuntary Context Switches      0
@@ -115,26 +118,26 @@ NOTE: PROCEDURE IMPORT used (Total process time):
       Block Output Operations           0
       
 
+3 The SAS System                                                                                     23:24 Tuesday, October 25, 2016
 
-30         proc sql;
-31         	select Variable
-3 The SAS System                                                                                   22:05 Wednesday, October 12, 2016
 
-32         	into :qwi_ids separated by " "
-33         	from INTERWRK.ids
-34         ;
-35         quit;
+33         proc sql;
+34         	select Variable
+35         	into :qwi_ids separated by " "
+36         	from INTERWRK.ids
+37         ;
+38         quit;
 NOTE: The PROCEDURE SQL printed page 1.
 NOTE: PROCEDURE SQL used (Total process time):
       real time           0.02 seconds
       user cpu time       0.02 seconds
-      system cpu time     0.00 seconds
-      memory              2299.56k
+      system cpu time     0.01 seconds
+      memory              2301.31k
       OS Memory           7064.00k
-      Timestamp           10/12/2016 10:05:13 PM
+      Timestamp           10/25/2016 11:24:59 PM
       Step Count                        2  Switch Count  1
       Page Faults                       0
-      Page Reclaims                     1353
+      Page Reclaims                     1354
       Page Swaps                        0
       Voluntary Context Switches        10
       Involuntary Context Switches      0
@@ -142,130 +145,130 @@ NOTE: PROCEDURE SQL used (Total process time):
       Block Output Operations           0
       
 
-36         %put LEHD IDS: &qwi_ids.;
+39         %put LEHD IDS: &qwi_ids.;
 LEHD IDS: periodicity seasonadj geo_level geography ind_level industry ownercode sex agegrp race ethnicity education firmage 
 firmsize year quarter
-37         
-38         /* Levels:
-39            INTERWRK.sum_qwi_sample (for testing)
-40            INTERWRK.sum_qwi_us
-41         
-42            Rates:
-43            INTERWRK.sum_qwir_sample (for testing)
-44            INTERWRK.sum_qwir_us
-45         */
-46         
-47         /* show the industry level on the file */
-48         
-49         proc freq data=INTERWRK.sum_qwi_&us.;
-50         table ind_level;
-51         run;
+40         
+41         /* Levels:
+42            INTERWRK.sum_qwi_sample (for testing)
+43            INTERWRK.sum_qwi_us
+44         
+45            Rates:
+46            INTERWRK.sum_qwir_sample (for testing)
+47            INTERWRK.sum_qwir_us
+48         */
+49         
+50         /* show the industry level on the file */
+51         
+52         proc freq data=INTERWRK.sum_qwi_&us.;
+53         table ind_level;
+54         run;
 
-NOTE: There were 873774 observations read from the data set INTERWRK.SUM_QWI_US.
+NOTE: There were 873936 observations read from the data set INTERWRK.SUM_QWI_US.
 NOTE: The PROCEDURE FREQ printed page 2.
 NOTE: PROCEDURE FREQ used (Total process time):
-      real time           0.10 seconds
-      user cpu time       0.06 seconds
-      system cpu time     0.05 seconds
-      memory              513.96k
+      real time           0.09 seconds
+      user cpu time       0.05 seconds
+      system cpu time     0.04 seconds
+      memory              515.03k
       OS Memory           7320.00k
-      Timestamp           10/12/2016 10:05:13 PM
+      Timestamp           10/25/2016 11:24:59 PM
       Step Count                        3  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     193
+      Page Reclaims                     192
       Page Swaps                        0
       Voluntary Context Switches        0
+4 The SAS System                                                                                     23:24 Tuesday, October 25, 2016
+
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           136
-4 The SAS System                                                                                   22:05 Wednesday, October 12, 2016
-
       
 
-52         
-53         proc sort data=INTERWRK.sum_qwi_&us.(where=(ind_level="4")) out=sum_qwi_by_naics4;
-54         by industry;
-55         run;
+55         
+56         proc sort data=INTERWRK.sum_qwi_&us.(where=(ind_level="4")) out=sum_qwi_by_naics4;
+57         by industry;
+58         run;
 
-NOTE: There were 870966 observations read from the data set INTERWRK.SUM_QWI_US.
+NOTE: There were 873936 observations read from the data set INTERWRK.SUM_QWI_US.
       WHERE ind_level='4';
-NOTE: The data set WORK.SUM_QWI_BY_NAICS4 has 870966 observations and 25 variables.
+NOTE: The data set WORK.SUM_QWI_BY_NAICS4 has 873936 observations and 25 variables.
 NOTE: PROCEDURE SORT used (Total process time):
       real time           0.50 seconds
-      user cpu time       0.29 seconds
+      user cpu time       0.30 seconds
       system cpu time     0.20 seconds
-      memory              125195.96k
+      memory              125196.37k
       OS Memory           132264.00k
-      Timestamp           10/12/2016 10:05:13 PM
+      Timestamp           10/25/2016 11:24:59 PM
       Step Count                        4  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     30924
+      Page Reclaims                     31029
       Page Swaps                        0
       Voluntary Context Switches        0
       Involuntary Context Switches      1
       Block Input Operations            0
-      Block Output Operations           204688
+      Block Output Operations           205328
       
 
-56         
-57         
-58         data qwiht;
-59         	merge sum_qwi_by_naics4(in=_qwi)
-60                       INTERWRK.htindustries(in=_ht)
-61         	;
-62         	by industry;
-63         	_merge=_qwi+2*_ht;
-64         	/* this selects all levels */
-65         	ht=(oes12htlvl ne "");
-66         	/* recode some others */
-67         	length female agenum 3;
-68         	female=(sex="2");
-69         	agenum=substr(agegrp,3,1);
-70         	fem_age=female*10+agenum;
-71         run;
+59         
+60         
+61         data qwiht;
+62         	merge sum_qwi_by_naics4(in=_qwi)
+63                       INTERWRK.htindustries(in=_ht)
+64         	;
+65         	by industry;
+66         	_merge=_qwi+2*_ht;
+67         	/* this selects all levels */
+68         	ht=(oes12htlvl ne "");
+69         	/* recode some others */
+70         	length female agenum 3;
+71         	female=(sex="2");
+72         	agenum=substr(agegrp,3,1);
+73         	fem_age=female*10+agenum;
+74         run;
 
 NOTE: Character values have been converted to numeric values at the places given by: (Line):(Column).
-      69:9   
+      72:9   
 NOTE: Missing values were generated as a result of performing an operation on missing values.
       Each place is given by: (Number of times) at (Line):(Column).
-      4 at 70:19   
-NOTE: There were 870966 observations read from the data set WORK.SUM_QWI_BY_NAICS4.
+      4 at 73:19   
+NOTE: There were 873936 observations read from the data set WORK.SUM_QWI_BY_NAICS4.
 NOTE: There were 52 observations read from the data set INTERWRK.HTINDUSTRIES.
-NOTE: The data set WORK.QWIHT has 870970 observations and 34 variables.
+NOTE: The data set WORK.QWIHT has 873940 observations and 34 variables.
 NOTE: DATA statement used (Total process time):
       real time           0.40 seconds
-      user cpu time       0.23 seconds
-      system cpu time     0.19 seconds
-      memory              1001.65k
-      OS Memory           8600.00k
-5 The SAS System                                                                                   22:05 Wednesday, October 12, 2016
+      user cpu time       0.25 seconds
+5 The SAS System                                                                                     23:24 Tuesday, October 25, 2016
 
-      Timestamp           10/12/2016 10:05:14 PM
+      system cpu time     0.16 seconds
+      memory              998.90k
+      OS Memory           8600.00k
+      Timestamp           10/25/2016 11:25:00 PM
       Step Count                        5  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     379
+      Page Reclaims                     384
       Page Swaps                        0
       Voluntary Context Switches        0
       Involuntary Context Switches      0
       Block Input Operations            0
-      Block Output Operations           327944
+      Block Output Operations           329096
       
 
-72         
-73         proc freq data=qwiht;
-74         title "Should be no 2s";
-75         table _merge;
-76         run;
+75         
+76         proc freq data=qwiht;
+77         title "Should be no 2s";
+78         table _merge;
+79         run;
 
-NOTE: There were 870970 observations read from the data set WORK.QWIHT.
+NOTE: There were 873940 observations read from the data set WORK.QWIHT.
 NOTE: The PROCEDURE FREQ printed page 3.
 NOTE: PROCEDURE FREQ used (Total process time):
       real time           0.10 seconds
       user cpu time       0.04 seconds
-      system cpu time     0.07 seconds
-      memory              488.78k
+      system cpu time     0.05 seconds
+      memory              489.34k
       OS Memory           8344.00k
-      Timestamp           10/12/2016 10:05:14 PM
+      Timestamp           10/25/2016 11:25:00 PM
       Step Count                        6  Switch Count  0
       Page Faults                       0
       Page Reclaims                     13
@@ -276,160 +279,160 @@ NOTE: PROCEDURE FREQ used (Total process time):
       Block Output Operations           136
       
 
-77         
-78         proc print data=qwiht(where=(_merge=2));
-79         run;
+80         
+81         proc print data=qwiht(where=(_merge=2));
+82         run;
 
 NOTE: There were 4 observations read from the data set WORK.QWIHT.
       WHERE _merge=2;
 NOTE: The PROCEDURE PRINT printed page 4.
 NOTE: PROCEDURE PRINT used (Total process time):
       real time           0.07 seconds
-      user cpu time       0.02 seconds
+      user cpu time       0.03 seconds
       system cpu time     0.05 seconds
-      memory              563.25k
+      memory              564.34k
       OS Memory           8344.00k
-      Timestamp           10/12/2016 10:05:14 PM
+      Timestamp           10/25/2016 11:25:00 PM
       Step Count                        7  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     58
+      Page Reclaims                     56
       Page Swaps                        0
-      Voluntary Context Switches        1
+      Voluntary Context Switches        0
+6 The SAS System                                                                                     23:24 Tuesday, October 25, 2016
+
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           0
-6 The SAS System                                                                                   22:05 Wednesday, October 12, 2016
-
       
 
-80         
-81         data HTBASE.qwiht;
-82         	set qwiht(where=(_merge ne 2));
-83         run;
+83         
+84         data HTBASE.qwiht_us;
+85         	set qwiht(where=(_merge ne 2));
+86         run;
 
-NOTE: There were 870966 observations read from the data set WORK.QWIHT.
+NOTE: There were 873936 observations read from the data set WORK.QWIHT.
       WHERE _merge not = 2;
-NOTE: The data set HTBASE.QWIHT has 870966 observations and 34 variables.
+NOTE: The data set HTBASE.QWIHT_US has 873936 observations and 34 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.50 seconds
-      user cpu time       0.15 seconds
-      system cpu time     0.20 seconds
-      memory              593.28k
+      real time           0.51 seconds
+      user cpu time       0.11 seconds
+      system cpu time     0.25 seconds
+      memory              595.25k
       OS Memory           8344.00k
-      Timestamp           10/12/2016 10:05:15 PM
+      Timestamp           10/25/2016 11:25:01 PM
       Step Count                        8  Switch Count  0
       Page Faults                       0
       Page Reclaims                     8
       Page Swaps                        0
-      Voluntary Context Switches        502
-      Involuntary Context Switches      165
+      Voluntary Context Switches        266
+      Involuntary Context Switches      169
       Block Input Operations            0
-      Block Output Operations           327944
+      Block Output Operations           329096
       
 
-84         
-85         title;
-86         proc means data=HTBASE.qwiht(where=(sex ne "0" and agegrp="A00"));
-87         title "Means of select variables, by HT status";
-88         class ht;
-89         var &qwivars. female;
-90         run;
+87         
+88         title;
+89         proc means data=HTBASE.qwiht_us(where=(sex ne "0" and agegrp="A00"));
+90         title "Means of select variables, by HT status";
+91         class ht;
+92         var &qwivars. female;
+93         run;
 
-NOTE: There were 64516 observations read from the data set HTBASE.QWIHT.
+NOTE: There were 64736 observations read from the data set HTBASE.QWIHT_US.
       WHERE (sex not = '0') and (agegrp='A00');
 NOTE: The PROCEDURE MEANS printed page 5.
 NOTE: PROCEDURE MEANS used (Total process time):
-      real time           0.21 seconds
+      real time           0.19 seconds
       user cpu time       0.06 seconds
       system cpu time     0.10 seconds
-      memory              1992.12k
+      memory              1992.40k
       OS Memory           9628.00k
-      Timestamp           10/12/2016 10:05:15 PM
+      Timestamp           10/25/2016 11:25:01 PM
       Step Count                        9  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     348
+      Page Reclaims                     345
       Page Swaps                        0
-      Voluntary Context Switches        20
-      Involuntary Context Switches      163
-      Block Input Operations            328136
+      Voluntary Context Switches        14
+      Involuntary Context Switches      147
+      Block Input Operations            329120
       Block Output Operations           0
       
 
-91         
-92         proc freq data=HTBASE.qwiht(where=(sex = "0" and agegrp ne "A00"));
-93         title "Distribution of age groups, weighted by employment, by HT status";
-7 The SAS System                                                                                   22:05 Wednesday, October 12, 2016
+7 The SAS System                                                                                     23:24 Tuesday, October 25, 2016
 
-94         table agegrp*ht;
-95         weight b;
-96         run;
+94         
+95         proc freq data=HTBASE.qwiht(where=(sex = "0" and agegrp ne "A00"));
+96         title "Distribution of age groups, weighted by employment, by HT status";
+97         table agegrp*ht;
+98         weight b;
+99         run;
 
-NOTE: There were 258064 observations read from the data set HTBASE.QWIHT.
+NOTE: There were 258944 observations read from the data set HTBASE.QWIHT.
       WHERE (sex='0') and (agegrp not = 'A00');
 NOTE: The PROCEDURE FREQ printed page 6.
 NOTE: PROCEDURE FREQ used (Total process time):
-      real time           0.16 seconds
-      user cpu time       0.08 seconds
+      real time           0.12 seconds
+      user cpu time       0.07 seconds
       system cpu time     0.05 seconds
-      memory              786.43k
+      memory              783.56k
       OS Memory           8856.00k
-      Timestamp           10/12/2016 10:05:15 PM
+      Timestamp           10/25/2016 11:25:01 PM
       Step Count                        10  Switch Count  0
-      Page Faults                       3
-      Page Reclaims                     63
+      Page Faults                       0
+      Page Reclaims                     67
       Page Swaps                        0
-      Voluntary Context Switches        9
+      Voluntary Context Switches        5
       Involuntary Context Switches      0
-      Block Input Operations            800
+      Block Input Operations            0
       Block Output Operations           272
       
 
-97         
-98         proc freq data=HTBASE.qwiht(where=(sex ne "0" and agegrp ne "A00"));
-99         title "Distribution of sex-age groups, weighted by employment, by HT status";
-100        table fem_age*ht;
-101        weight b;
-102        run;
+100        
+101        proc freq data=HTBASE.qwiht_us(where=(sex ne "0" and agegrp ne "A00"));
+102        title "Distribution of sex-age groups, weighted by employment, by HT status";
+103        table fem_age*ht;
+104        weight b;
+105        run;
 
-NOTE: There were 516128 observations read from the data set HTBASE.QWIHT.
+NOTE: There were 517888 observations read from the data set HTBASE.QWIHT_US.
       WHERE (sex not = '0') and (agegrp not = 'A00');
 NOTE: The PROCEDURE FREQ printed pages 7-8.
 NOTE: PROCEDURE FREQ used (Total process time):
       real time           0.17 seconds
-      user cpu time       0.10 seconds
-      system cpu time     0.07 seconds
-      memory              810.71k
+      user cpu time       0.12 seconds
+      system cpu time     0.05 seconds
+      memory              812.00k
       OS Memory           8856.00k
-      Timestamp           10/12/2016 10:05:15 PM
+      Timestamp           10/25/2016 11:25:01 PM
       Step Count                        11  Switch Count  0
       Page Faults                       0
       Page Reclaims                     30
       Page Swaps                        0
-      Voluntary Context Switches        1
+      Voluntary Context Switches        3
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           280
       
 
-103        
-104        
+106        
+107        
 
 NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
-NOTE: The SAS System used:
-      real time           2.33 seconds
-      user cpu time       1.08 seconds
-8 The SAS System                                                                                   22:05 Wednesday, October 12, 2016
+8 The SAS System                                                                                     23:24 Tuesday, October 25, 2016
 
-      system cpu time     1.00 seconds
-      memory              131005.68k
+NOTE: The SAS System used:
+      real time           2.27 seconds
+      user cpu time       1.07 seconds
+      system cpu time     0.98 seconds
+      memory              131004.75k
       OS Memory           132264.00k
-      Timestamp           10/12/2016 10:05:15 PM
+      Timestamp           10/25/2016 11:25:01 PM
       Step Count                        11  Switch Count  35
-      Page Faults                       3
-      Page Reclaims                     38254
+      Page Faults                       0
+      Page Reclaims                     38366
       Page Swaps                        0
-      Voluntary Context Switches        725
-      Involuntary Context Switches      342
-      Block Input Operations            329056
-      Block Output Operations           861536
+      Voluntary Context Switches        484
+      Involuntary Context Switches      330
+      Block Input Operations            329240
+      Block Output Operations           864480
       

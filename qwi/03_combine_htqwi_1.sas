@@ -63,12 +63,12 @@ run;
 proc print data=qwiht(where=(_merge=2));
 run;
 
-data HTBASE.qwiht;
+data HTBASE.qwiht_us;
 	set qwiht(where=(_merge ne 2));
 run;
 
 title;
-proc means data=HTBASE.qwiht(where=(sex ne "0" and agegrp="A00"));
+proc means data=HTBASE.qwiht_us(where=(sex ne "0" and agegrp="A00"));
 title "Means of select variables, by HT status";
 class ht;
 var &qwivars. female;
@@ -80,7 +80,7 @@ table agegrp*ht;
 weight b;
 run;
 
-proc freq data=HTBASE.qwiht(where=(sex ne "0" and agegrp ne "A00"));
+proc freq data=HTBASE.qwiht_us(where=(sex ne "0" and agegrp ne "A00"));
 title "Distribution of sex-age groups, weighted by employment, by HT status";
 table fem_age*ht;
 weight b;
