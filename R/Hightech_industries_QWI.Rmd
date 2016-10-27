@@ -1,0 +1,78 @@
+---
+title: "The demographics of high-tech industries"
+author: "Nathan Goldschlag and Lars Vilhuber"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 1
+  pdf_document:
+    keep_tex: yes
+    toc: yes
+    toc_depth: 1
+---
+
+Blurb about hightech.
+
+```{r options, echo=FALSE,warning=FALSE,message=FALSE}
+library(gdata)
+library(knitr)
+library(ggplot2)
+htbase <- "../data"
+```
+
+The QWI files are available by NAICS4 for all states, although the historical availability varies by state. For more details, see [Download_QWI](Download_QWI.html), which should be run prior to this file.
+
+
+```{r load_qwi_naics4,cache=TRUE,message=FALSE}
+# If we are starting from scratch, we load the output file
+qwiht <- read.csv(gzfile(paste(htbase,"qwiht_us.csv.gz",sep="/")))
+qwiht$qtime <- (qwiht$year -1985) * 4 + qwiht$quarter
+qwiht <- subset(qwiht,!is.na(e) & !is.na(b))
+library(doBy)
+library(zoo)
+sumfun <- function(x,...){
+  sum(as.numeric(x),...)
+}
+qwiht_sum <- summaryBy(jc+e+b+jd ~ ht+qtime+sex+agegrp,data=qwiht,FUN=sumfun,na.rm = TRUE)
+qwiht_sum$year <- floor((qwiht_sum$qtime-1)/4) + 1985
+qwiht_sum$quarter <- qwiht_sum$qtime %% 4
+qwiht_sum$date <- as.Date(as.yearqtr(qwiht_sum$year + (qwiht_sum$quarter-1)/4))
+```
+We compute the job creation and destruction rates:
+```{r jcrjdr}
+
+qwiht_sum$eb2 <- ( qwiht_sum$e.sum + qwiht_sum$b.sum )/2
+
+qwiht_sum$jcr <- qwiht_sum$jc/qwiht_sum$eb2
+qwiht_sum$jdr <- qwiht_sum$jd/qwiht_sum$eb2
+
+qwiht_sum$industryht <- "High Tech"
+qwiht_sum[which(qwiht_sum$ht==0),"industryht"] <- "Non-High Tech"
+
+```
+
+
+and merge on the indicators for HighTech status:
+```{r merge_ht,eval=FALSE}
+ht <- read.csv(paste(htbase,"ht_stem_industries.csv",sep="/"))
+# actually, we've done the merge elsewhere...
+```
+
+# Results
+
+```{r graph_Emp,echo=FALSE,warning=FALSE,error=FALSE}
+library(ggplot2)
+library(tis)
+
+gg <- ggplot(data=subset(qwiht_sum,sex=="0" & agegrp=="A00"),
+             aes(date,jcr,color=industryht))+
+  geom_line()
+gg <- nberShade(gg)
+gg + scale_color_brewer(type="qual") + 
+  theme_minimal() + 
+  scale_x_date("Time", 
+               date_breaks = "3 years", 
+               date_labels = "%b%y", 
+               date_minor_breaks = "3 months",
+               limits = as.Date(c("1990-01-01","2016-01-01")))
+

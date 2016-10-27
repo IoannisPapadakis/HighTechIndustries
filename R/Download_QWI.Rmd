@@ -1,0 +1,52 @@
+---
+title: "Downloading QWI for all states"
+author: "Lars Vilhuber"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 1
+  pdf_document:
+    keep_tex: yes
+    toc: yes
+    toc_depth: 1
+---
+
+
+
+```{r options, echo=FALSE,warning=FALSE,message=FALSE}
+library(gdata)
+library(knitr)
+library(ggplot2)
+```
+```{r qwi_options, warning=FALSE,message=FALSE,echo=FALSE}
+qwistates <- "AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY"
+qwistates <- unlist(strsplit(qwistates," "))
+htbase <- "../data"
+```
+
+
+
+# Some Technical Stuff
+
+We first define (source) a function '[download_qwi.R](download_qwi.R)' to download and subset QWI CSV files.
+```{r define_function,cache=FALSE}
+source("download_qwi.R",echo = TRUE)
+```
+We then cycle through all the states and download the relevant file. 
+```{r download_all,cache=TRUE,eval=FALSE}
+download.date <- Sys.Date()
+time.qwi <- system.time(for (x in qwistates) { 
+  eval(parse(text=paste("qwi_",tolower(x)," <- download_qwi(\"",x,"\")",sep = "")))
+  })
+#The above code can take a while, in this example and on my computer, it ran for `r round(time.qwi[1]/60,0)` minutes on `r download.date`.
+```
+
+Now that we have the files, we collate them all into a single file:
+```{r collate_states,cache=TRUE,eval=FALSE}
+for (x in qwistates) { eval(parse(text=paste("qwi_",tolower(x),"$state = \"",x,"\"",sep = "")))}
+for (x in qwistates[1]) { eval(parse(text=paste("all <- qwi_",tolower(x),sep = "")))}
+for (x in qwistates[-1]) { eval(parse(text=paste("all <- rbind(all,qwi_",tolower(x),")",sep = "")))}
+write.csv(x = all,file="qwi_naics4_extract.csv")
+```
+
+
