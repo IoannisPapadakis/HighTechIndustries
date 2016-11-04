@@ -80,17 +80,17 @@ gen jc_share=100*(jc/jc_tot)
 by ts: egen jd_tot=sum(jd)
 gen jd_share=100*(jd/jd_tot)
 
-tsfilter hp e_hp = e_share if hitech==1, smooth(1200) trend(e_share_tr)
-tsfilter hp jc_hp = jc_share if hitech==1, smooth(1200) trend(jc_share_tr)
-tsfilter hp jd_hp = jd_share if hitech==1, smooth(1200) trend(jd_share_tr)
+tsfilter hp e_hp = e_share if hitech==1, smooth(1600) trend(e_share_tr)
+tsfilter hp jc_hp = jc_share if hitech==1, smooth(1600) trend(jc_share_tr)
+tsfilter hp jd_hp = jd_share if hitech==1, smooth(1600) trend(jd_share_tr)
 
-tw (scatter e_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech Share EoQ Employment") xtitle("Year") title("High Tech Share EoQ Employment") legend(off) note("Hodrick-Prescott filter shown with multiplier 1200.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw (scatter e_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech Share EoQ Employment") xtitle("Year") title("High Tech Share EoQ Employment") legend(off) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_ew_eshare.png, replace
 
-tw (scatter jc_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech JC Share") xtitle("Year") title("High Tech Share Job Creation") legend(off) note("Hodrick-Prescott filter shown with multiplier 1200.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw (scatter jc_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech JC Share") xtitle("Year") title("High Tech Share Job Creation") legend(off) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_ew_jcshare.png, replace
 
-tw (scatter jd_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech JD Share") xtitle("Year") title("High Tech Share Job Destruction") legend(off) note("Hodrick-Prescott filter shown with multiplier 1200.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw (scatter jd_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech JD Share") xtitle("Year") title("High Tech Share Job Destruction") legend(off) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_ew_jdshare.png, replace
 
 
@@ -116,15 +116,15 @@ by ts hitech: gen e_share_sexdiff=e_share[_n]-e_share[_n+1]
 by ts hitech: gen jc_share_sexdiff=jc_share[_n]-jc_share[_n+1]
 by ts hitech: gen jd_share_sexdiff=jd_share[_n]-jd_share[_n+1]
 
-tsfilter hp e_m_hp = e_share if hitech==1 & female==0, smooth(1200) trend(e_share_m_tr)
-tsfilter hp e_f_hp = e_share if hitech==1 & female==1, smooth(1200) trend(e_share_f_tr)
-tsfilter hp jc_m_hp = jc_share if hitech==1 & female==0, smooth(1200) trend(jc_share_m_tr)
-tsfilter hp jc_f_hp = jc_share if hitech==1 & female==1, smooth(1200) trend(jc_share_f_tr)
-tsfilter hp jd_m_hp = jd_share if hitech==1 & female==0, smooth(1200) trend(jd_share_m_tr)
-tsfilter hp jd_f_hp = jd_share if hitech==1 & female==1, smooth(1200) trend(jd_share_f_tr)
-tsfilter hp e_diff_hp = e_share_sexdiff if hitech==1 & female==0, smooth(1200) trend(e_share_sexdiff_tr)
-tsfilter hp jc_diff_hp = jc_share_sexdiff if hitech==1 & female==0, smooth(1200) trend(jc_share_sexdiff_tr)
-tsfilter hp jd_diff_hp = jd_share_sexdiff if hitech==1 & female==0, smooth(1200) trend(jd_share_sexdiff_tr)
+tsfilter hp e_m_hp = e_share if hitech==1 & female==0, smooth(1600) trend(e_share_m_tr)
+tsfilter hp e_f_hp = e_share if hitech==1 & female==1, smooth(1600) trend(e_share_f_tr)
+tsfilter hp jc_m_hp = jc_share if hitech==1 & female==0, smooth(1600) trend(jc_share_m_tr)
+tsfilter hp jc_f_hp = jc_share if hitech==1 & female==1, smooth(1600) trend(jc_share_f_tr)
+tsfilter hp jd_m_hp = jd_share if hitech==1 & female==0, smooth(1600) trend(jd_share_m_tr)
+tsfilter hp jd_f_hp = jd_share if hitech==1 & female==1, smooth(1600) trend(jd_share_f_tr)
+tsfilter hp e_diff_hp = e_share_sexdiff if hitech==1 & female==0, smooth(1600) trend(e_share_sexdiff_tr)
+tsfilter hp jc_diff_hp = jc_share_sexdiff if hitech==1 & female==0, smooth(1600) trend(jc_share_sexdiff_tr)
+tsfilter hp jd_diff_hp = jd_share_sexdiff if hitech==1 & female==0, smooth(1600) trend(jd_share_sexdiff_tr)
 
 tw 	(scatter e_share ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (scatter e_share ts if hitech==1 & female==1, lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)), ytitle("High Tech Share EoQ Employment") xtitle("Year") title("High Tech Share End of Quarter Employment""Male and Female") legend(order(1 "Male" 2 "Female")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_sex_eshare.png, replace
@@ -136,13 +136,13 @@ tw 	(scatter jd_share ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwi
 graph export $plt/qwiht_sex_jdshare.png, replace
 
 
-tw 	(scatter e_share_sexdiff ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share_sexdiff_tr ts if hitech==1 & female==0, lwidth(.5) lcolor(navy) lpattern(dash)), ytitle("EoQ Emp Share Difference (Male-Female)") xtitle("Year") title("Difference in High Tech End of Quarter Employment Share") note("Hodrick-Prescott filter shown with multiplier 1200.""Difference calculated as male share minus female share.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) legend(off)
+tw 	(scatter e_share_sexdiff ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share_sexdiff_tr ts if hitech==1 & female==0, lwidth(.5) lcolor(navy) lpattern(dash)), ytitle("EoQ Emp Share Difference (Male-Female)") xtitle("Year") title("Difference in High Tech End of Quarter Employment Share") note("Hodrick-Prescott filter shown with multiplier 1600.""Difference calculated as male share minus female share.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) legend(off)
 graph export $plt/qwiht_sex_esharediff.png, replace
 
-tw 	(scatter jc_share_sexdiff ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share_sexdiff_tr ts if hitech==1 & female==0, lwidth(.5) lcolor(navy) lpattern(dash)), ytitle("JC Share Difference (Male-Female)") xtitle("Year") title("Difference in High Tech Job Creation Share") note("Hodrick-Prescott filter shown with multiplier 1200.""Difference calculated as male share minus female share.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) legend(off)
+tw 	(scatter jc_share_sexdiff ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share_sexdiff_tr ts if hitech==1 & female==0, lwidth(.5) lcolor(navy) lpattern(dash)), ytitle("JC Share Difference (Male-Female)") xtitle("Year") title("Difference in High Tech Job Creation Share") note("Hodrick-Prescott filter shown with multiplier 1600.""Difference calculated as male share minus female share.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) legend(off)
 graph export $plt/qwiht_sex_jcsharediff.png, replace
 
-tw 	(scatter jd_share_sexdiff ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share_sexdiff_tr ts if hitech==1 & female==0, lwidth(.5) lcolor(navy) lpattern(dash)), ytitle("JD Share Difference (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share") note("Hodrick-Prescott filter shown with multiplier 1200.""Difference calculated as male share minus female share.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) legend(off)
+tw 	(scatter jd_share_sexdiff ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share_sexdiff_tr ts if hitech==1 & female==0, lwidth(.5) lcolor(navy) lpattern(dash)), ytitle("JD Share Difference (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share") note("Hodrick-Prescott filter shown with multiplier 1600.""Difference calculated as male share minus female share.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) legend(off)
 graph export $plt/qwiht_sex_jdsharediff.png, replace
 
 
@@ -184,8 +184,9 @@ graph export $plt/qwiht_age_jddist.png, replace
 use `qwiht', clear
 * recode ages
 replace agegrp="a) 14-24" if agegrp=="A01" | agegrp=="A02" | agegrp=="A03"
-replace agegrp="b) 25-54" if agegrp=="A04" | agegrp=="A05" | agegrp=="A06"
-replace agegrp="c) 55-99" if agegrp=="A07" | agegrp=="A08" 
+replace agegrp="b) 25-34" if agegrp=="A04" 
+replace agegrp="c) 35-54" if agegrp=="A05" | agegrp=="A06"
+replace agegrp="d) 55-99" if agegrp=="A07" | agegrp=="A08" 
 collapse (sum) e jc jd, by(hitech ts agegrp)
 sort hitech agegrp ts
 gen ts_n=_n
@@ -204,7 +205,7 @@ by hitech agegrp: gen e_share_ma = (e_share[_n-1] + e_share[_n] + e_share[_n-1])
 by hitech agegrp: gen jc_share_ma = (jc_share[_n-1] + jc_share[_n] + jc_share[_n-1])/3
 by hitech agegrp: gen jd_share_ma = (jd_share[_n-1] + jd_share[_n] + jd_share[_n-1])/3
 
-keep if ts>=1990.5
+keep if ts>1995
 
 by hitech agegrp: gen e_share_indx=100*(e_share_ma[_n]-e_share_ma[1])/e_share_ma[1]
 by hitech agegrp: gen jc_share_indx=100*(jc_share_ma[_n]-jc_share_ma[1])/jc_share_ma[1]
@@ -214,28 +215,28 @@ by hitech agegrp: gen jd_share_indx=100*(jd_share_ma[_n]-jd_share_ma[1])/jd_shar
 egen agegrp_int=group(agegrp)
 
 foreach v of num 1/3 {
-	tsfilter hp e_hp_`v' = e_share if hitech==1 & agegrp_int==`v', smooth(1200) trend(e_share_tr_`v')
-	tsfilter hp jc_hp_`v' = jc_share if hitech==1 & agegrp_int==`v', smooth(1200) trend(jc_share_tr_`v')
-	tsfilter hp jd_hp_`v' = jd_share if hitech==1 & agegrp_int==`v', smooth(1200) trend(jd_share_tr_`v')
+	tsfilter hp e_hp_`v' = e_share if hitech==1 & agegrp_int==`v', smooth(1600) trend(e_share_tr_`v')
+	tsfilter hp jc_hp_`v' = jc_share if hitech==1 & agegrp_int==`v', smooth(1600) trend(jc_share_tr_`v')
+	tsfilter hp jd_hp_`v' = jd_share if hitech==1 & agegrp_int==`v', smooth(1600) trend(jd_share_tr_`v')
 }
 
-tw 	(line e_share ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share ts if hitech==1 & agegrp=="b) 25-54", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line e_share ts if hitech==1 & agegrp=="c) 55-99", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share EoQ Employment") xtitle("Year") title("High Tech Share End of Quarter Employment by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1200.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw (line e_share ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share ts if hitech==1 & agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line e_share ts if hitech==1 & agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line e_share ts if hitech==1 & agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share EoQ Employment") xtitle("Year") title("High Tech Share End of Quarter Employment by Age") legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_age_eshare.png, replace
 
-tw 	(line jc_share ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share ts if hitech==1 & agegrp=="b) 25-54", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jc_share ts if hitech==1 & agegrp=="c) 55-99", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JC") xtitle("Year") title("High Tech Share Job Creation by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1200.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw (line jc_share ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share ts if hitech==1 & agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jc_share ts if hitech==1 & agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jc_share ts if hitech==1 & agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JC") xtitle("Year") title("High Tech Share Job Creation by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_age_jcshare.png, replace
 
-tw 	(line jd_share ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share ts if hitech==1 & agegrp=="b) 25-54", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jd_share ts if hitech==1 & agegrp=="c) 55-99", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JD") xtitle("Year") title("High Tech Share Job Destruction by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1200.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw (line jd_share ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share ts if hitech==1 & agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jd_share ts if hitech==1 & agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jd_share ts if hitech==1 & agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JD") xtitle("Year") title("High Tech Share Job Destruction by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_age_jdshare.png, replace
 
 
-tw 	(line e_share_indx ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share_indx ts if hitech==1 & agegrp=="b) 25-54", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line e_share_indx ts if hitech==1 & agegrp=="c) 55-99", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share EoQ Employment Change") xtitle("Year") title("High Tech Share EoQ Employment Change by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1200.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw 	(line e_share_indx ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share_indx ts if hitech==1 & agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line e_share_indx ts if hitech==1 & agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line e_share_indx ts if hitech==1 & agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share EoQ Employment Change") xtitle("Year") title("High Tech Share EoQ Employment Change by Age") legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1600.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_age_eshare_chg.png, replace
 
-tw 	(line jc_share_indx ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share_indx ts if hitech==1 & agegrp=="b) 25-54", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jc_share_indx ts if hitech==1 & agegrp=="c) 55-99", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JC Change") xtitle("Year") title("High Tech Share Job Creation Change by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1200.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw 	(line jc_share_indx ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_share_indx ts if hitech==1 & agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jc_share_indx ts if hitech==1 & agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jc_share_indx ts if hitech==1 & agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JC Change") xtitle("Year") title("High Tech Share Job Creation Change by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1600.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_age_jcshare_chg.png, replace
 
-tw 	(line jd_share_indx ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share_indx ts if hitech==1 & agegrp=="b) 25-54", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jd_share_indx ts if hitech==1 & agegrp=="c) 55-99", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JD Change") xtitle("Year") title("High Tech Share Job Destruction Change by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1200.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw (line jd_share_indx ts if hitech==1 & agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share_indx ts if hitech==1 & agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jd_share_indx ts if hitech==1 & agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(triangle_hollow) connect(1) msize(1)) (line jd_share_indx ts if hitech==1 & agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(diamond_hollow) connect(1) msize(1)), ylabel(,angle(horizontal)) ytitle("High Tech Share JD Change") xtitle("Year") title("High Tech Share Job Destruction Change by Age") legend(order(1 "a) 14-24" 2 "b) 25-54" 3 "c) 55-99")) note("Hodrick-Prescott filter shown with multiplier 1600.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_age_jdshare_chg.png, replace
 
 
@@ -378,16 +379,74 @@ gen e_pct_ht_diff=e_pct_ht-e_pct_ht_f
 gen jc_pct_ht_diff=jc_pct_ht-jc_pct_ht_f
 gen jd_pct_ht_diff=jd_pct_ht-jd_pct_ht_f
 
+tw 	(line e_pct_ht_diff ts if agegrp=="a) 14-18", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="b) 19-21", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="c) 22-24", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="d) 25-34", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="e) 35-44", lcolor(teal) mcolor(teal) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="f) 45-54", lcolor(cranberry) mcolor(cranberry) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="g) 55-64", lcolor(lavender) mcolor(lavender) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="h) 65-99", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-18" 2 "b) 19-21" 3 "c) 22-24" 4 "d) 25-34" 5 "e) 35-44" 6 "f) 45-54" 7 "g) 55-64" 8 "h 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_agesex_htshare_sexdiff_e_allgroups.png, replace
+
+tw 	(line jc_pct_ht_diff ts if agegrp=="a) 14-18", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="b) 19-21", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="c) 22-24", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="d) 25-34", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="e) 35-44", lcolor(teal) mcolor(teal) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="f) 45-54", lcolor(cranberry) mcolor(cranberry) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="g) 55-64", lcolor(lavender) mcolor(lavender) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="h) 65-99", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-18" 2 "b) 19-21" 3 "c) 22-24" 4 "d) 25-34" 5 "e) 35-44" 6 "f) 45-54" 7 "g) 55-64" 8 "h 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Creation Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_agesex_htshare_sexdiff_jc_allgroups.png, replace
+
+tw 	(line jd_pct_ht_diff ts if agegrp=="a) 14-18", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="b) 19-21", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="c) 22-24", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="d) 25-34", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="e) 35-44", lcolor(teal) mcolor(teal) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="f) 45-54", lcolor(cranberry) mcolor(cranberry) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="g) 55-64", lcolor(lavender) mcolor(lavender) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="h) 65-99", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-18" 2 "b) 19-21" 3 "c) 22-24" 4 "d) 25-34" 5 "e) 35-44" 6 "f) 45-54" 7 "g) 55-64" 8 "h 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_agesex_htshare_sexdiff_jd_allgroups.png, replace
 
 
-tw 	(line e_pct_ht_diff ts if agegrp=="a) 14-18", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="b) 19-21", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="c) 22-24", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="d) 25-34", lcolor(dk_orange) mcolor(dk_orange) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="e) 35-44", lcolor(teal) mcolor(teal) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="f) 45-54", lcolor(cranberry) mcolor(cranberry) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="j) 55-64", lcolor(lavender) mcolor(lavender) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="k) 65-99", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-18" 2 "b) 19-21" 3 "c) 22-24" 4 "d) 25-34" 5 "e) 35-44" 6 "f) 45-54" 7 "g) 55-64" 8 "h 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
-graph export $plt/qwiht_agesex_htshare_sexdiff.png, replace
+use `qwiht', clear
+replace agegrp="a) 14-24" if agegrp=="A01" | agegrp=="A02" | agegrp=="A03"
+replace agegrp="b) 25-34" if agegrp=="A04" 
+replace agegrp="c) 35-54" if agegrp=="A05" | agegrp=="A06"
+replace agegrp="d) 55-99" if agegrp=="A07" | agegrp=="A08" 
+collapse (sum) e jc jd, by(hitech ts agegrp sex)
+sort ts hitec sex agegrp
+by ts hitech sex: egen e_tot=sum(e)
+by ts hitech sex: egen jc_tot=sum(jc)
+by ts hitech sex: egen jd_tot=sum(jd)
+gen e_pct=100*(e/e_tot)
+gen jc_pct=100*(jc/jc_tot)
+gen jd_pct=100*(jd/jd_tot)
+sort ts sex agegrp hitech
+by ts sex agegrp: gen e_pct_ht=e_pct[_n+1]
+by ts sex agegrp: gen jc_pct_ht=jc_pct[_n+1]
+by ts sex agegrp: gen jd_pct_ht=jd_pct[_n+1]
+keep if hitech==0
+drop hitech
+sort ts agegrp sex
+by ts agegrp: gen e_pct_ht_f=e_pct_ht[_n+1]
+by ts agegrp: gen jc_pct_ht_f=jc_pct_ht[_n+1]
+by ts agegrp: gen jd_pct_ht_f=jd_pct_ht[_n+1]
+keep if sex==1
+drop sex
+gen e_pct_ht_diff=e_pct_ht-e_pct_ht_f
+gen jc_pct_ht_diff=jc_pct_ht-jc_pct_ht_f
+gen jd_pct_ht_diff=jd_pct_ht-jd_pct_ht_f
+
+sort agegrp ts
+by agegrp: gen ediff_ma = (e_pct_ht_diff[_n-1] + e_pct_ht_diff[_n] + e_pct_ht_diff[_n-1])/3
+by agegrp: gen jcdiff_ma = (jc_pct_ht_diff[_n-1] + jc_pct_ht_diff[_n] + jc_pct_ht_diff[_n-1])/3
+by agegrp: gen jddiff_ma = (jd_pct_ht_diff[_n-1] + jd_pct_ht_diff[_n] + jd_pct_ht_diff[_n-1])/3
+
+keep if ts>1995
+
+by agegrp: gen ediff_indx=100*(ediff_ma[_n]-ediff_ma[1])/ediff_ma[1]
+by agegrp: gen jcdiff_indx=100*(jcdiff_ma[_n]-jcdiff_ma[1])/jcdiff_ma[1]
+by agegrp: gen jddiff_indx=100*(jddiff_ma[_n]-jddiff_ma[1])/jddiff_ma[1]
+
+tw 	(line e_pct_ht_diff ts if agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_pct_ht_diff ts if agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_agesex_htshare_sexdiff_e.png, replace
+
+tw 	(line jc_pct_ht_diff ts if agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jc_pct_ht_diff ts if agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Creation Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_agesex_htshare_sexdiff_jc.png, replace
+
+tw 	(line jd_pct_ht_diff ts if agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_pct_ht_diff ts if agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white))  
+graph export $plt/qwiht_agesex_htshare_sexdiff_jd.png, replace
 
 
+tw 	(line ediff_indx ts if agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line ediff_indx ts if agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line ediff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line ediff_indx ts if agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_agesex_htshare_sexdiff_eindx.png, replace
 
+tw 	(line jcdiff_indx ts if agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jcdiff_indx ts if agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jcdiff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jcdiff_indx ts if agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Creation Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_agesex_htshare_sexdiff_jcindx.png, replace
 
-
-
+tw 	(line jddiff_indx ts if agegrp=="a) 14-24", lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jddiff_indx ts if agegrp=="b) 25-34", lcolor(maroon) mcolor(maroon) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jddiff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) mcolor(forest_green) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jddiff_indx ts if agegrp=="d) 55-99", lcolor(dkorange) mcolor(dkorange) lwidth(.5) m(circle_hollow) connect(1) msize(1)), legend(order(1 "a) 14-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white))  
+graph export $plt/qwiht_agesex_htshare_sexdiff_jdindx.png, replace
 
 
 
