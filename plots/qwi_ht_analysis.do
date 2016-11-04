@@ -69,7 +69,8 @@ graph export $plt/qwiht_datachecks_jcjd_eratio.png, replace
 ********************************************************************************
 
 use `qwiht', clear
-collapse (sum) e jc jd, by(hitech ts)
+collapse (sum) e b jc jd, by(hitech ts)
+gen denom = (e+b)/2
 sort hitech ts
 gen ts_n=_n
 tsset ts_n
@@ -80,10 +81,15 @@ by ts: egen jc_tot=sum(jc)
 gen jc_share=100*(jc/jc_tot)
 by ts: egen jd_tot=sum(jd)
 gen jd_share=100*(jd/jd_tot)
-
+gen jcr=100*(jc/denom)
+gen jdr=100*(jd/denom)
 tsfilter hp e_hp = e_share if hitech==1, smooth(1600) trend(e_share_tr)
 tsfilter hp jc_hp = jc_share if hitech==1, smooth(1600) trend(jc_share_tr)
 tsfilter hp jd_hp = jd_share if hitech==1, smooth(1600) trend(jd_share_tr)
+tsfilter hp jcr_hp = jcr if hitech==1, smooth(1600) trend(jcr_tr)
+tsfilter hp jcr_hp_nonht = jcr if hitech==0, smooth(1600) trend(jcr_tr_nonht)
+tsfilter hp jdr_hp = jdr if hitech==1, smooth(1600) trend(jdr_tr)
+tsfilter hp jdr_hp_nonht = jdr if hitech==0, smooth(1600) trend(jdr_tr_nonht)
 
 tw (scatter e_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line e_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech Share EoQ Employment") xtitle("Year") title("High Tech Share EoQ Employment") legend(off) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_ew_eshare.png, replace
@@ -94,6 +100,14 @@ graph export $plt/qwiht_ew_jcshare.png, replace
 tw (scatter jd_share ts if hitech==1, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (line jd_share_tr ts if hitech==1, lcolor(navy) lpattern(dash) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("High Tech JD Share") xtitle("Year") title("High Tech Share Job Destruction") legend(off) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_ew_jdshare.png, replace
 
+tw (line jcr_tr ts if hitech==1, lcolor(navy) lwidth(.5)) (line jcr_tr_nonht ts if hitech==0, lcolor(maroon) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("Job Creation Rate") xtitle("Year") title("High Tech and non-High Tech Job Creation Trends") legend(order(1 "HT Job Creation Rate" 2 "non-HT Job Creation Rate")) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_ew_jcr_htvnonht.png, replace
+
+tw (line jdr_tr ts if hitech==1, lcolor(navy) lwidth(.5)) (line jdr_tr_nonht ts if hitech==0, lcolor(maroon) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("Job Destruction Rate") xtitle("Year") title("High Tech and non-High Tech Job Destruction Trends") legend(order(1 "HT Job Destruction Rate" 2 "non-HT Job Destruction Rate")) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_ew_jcr_htvnonht.png, replace
+
+tw (line jcr_tr ts if hitech==1, lcolor(navy) lwidth(.5)) (line jdr_tr ts if hitech==1, lcolor(maroon) lwidth(.5)), ylabel(,angle(horizontal)) ytitle("Job Creation/Destruction Rate") xtitle("Year") title("High Tech Job Creation and Destruction Trends") legend(order(1 "Job Creation Rate" 2 "Job Destruction Rate")) note("Hodrick-Prescott filter shown with multiplier 1600.") graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+graph export $plt/qwiht_ew_jcrjdr.png, replace
 
 ********************************************************************************
 **********************************SEX FIGURES***********************************
