@@ -1,0 +1,55 @@
+The SAS System                                                                                   09:22 Tuesday, November 1, 2016   1
+
+Variable
+-----------
+periodicity
+seasonadj  
+geo_level  
+geography  
+ind_level  
+industry   
+ownercode  
+sex        
+agegrp     
+race       
+ethnicity  
+education  
+firmage    
+firmsize   
+year       
+quarter    
+The SAS System                                                                                   09:22 Tuesday, November 1, 2016   2
+
+Obs    geography    state
+
+  1       06         CA  
+  2       08         CO  
+  3       09         CT  
+  4       12         FL  
+  5       13         GA  
+  6       15         HI  
+  7       16         ID  
+  8       17         IL  
+  9       18         IN  
+ 10       20         KS  
+ 11       22         LA  
+ 12       23         ME  
+ 13       24         MD  
+ 14       27         MN  
+ 15       29         MO  
+ 16       30         MT  
+ 17       32         NV  
+ 18       34         NJ  
+ 19       35         NM  
+ 20       37         NC  
+ 21       38         ND  
+ 22       41         OR  
+ 23       42         PA  
+ 24       44         RI  
+ 25       45         SC  
+ 26       46         SD  
+ 27       47         TN  
+ 28       48         TX  
+ 29       53         WA  
+ 30       54         WV  
+ 31       55         WI  
