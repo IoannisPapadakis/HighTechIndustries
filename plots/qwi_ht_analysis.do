@@ -213,11 +213,11 @@ by agegrp: gen jc_pct_ht=jc_pct[_n+1]
 by agegrp: gen jd_pct_ht=jd_pct[_n+1]
 keep if hitech==0
 drop hitech
-graph bar e_pct e_pct_ht, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("EoQ Employment by Age Group""Average Percent 1995-2014") ytitle("Percent of EoQ Employment")
+graph bar e_pct e_pct_ht, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("EoQ Employment by Age Group""Average Percent 1995-2015") ytitle("Percent of EoQ Employment")
 graph export $plt/qwiht_age_edist.png, replace
-graph bar jc_pct jc_pct_ht, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Creation by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Creation")
+graph bar jc_pct jc_pct_ht, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Creation by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Creation")
 graph export $plt/qwiht_age_jcdist.png, replace
-graph bar jd_pct jd_pct_ht, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Destruction by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Destruction")
+graph bar jd_pct jd_pct_ht, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Destruction by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Destruction")
 graph export $plt/qwiht_age_jddist.png, replace
 
 use `qwiht', clear
@@ -357,17 +357,17 @@ by sex agegrp: gen jd_pct_ht=jd_pct[_n+1]
 keep if hitech==0
 drop hitech
 
-graph bar e_pct e_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male EoQ Employment by Age Group""Average Percent 1995-2014") ytitle("Percent of EoQ Employment")
+graph bar e_pct e_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male EoQ Employment by Age Group""Average Percent 1995-2015") ytitle("Percent of EoQ Employment")
 graph export $plt/qwiht_agesex_male_edist.png, replace
-graph bar e_pct e_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female EoQ Employment by Age Group""Average Percent 1995-2014") ytitle("Percent of EoQ Employment")
+graph bar e_pct e_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female EoQ Employment by Age Group""Average Percent 1995-2015") ytitle("Percent of EoQ Employment")
 graph export $plt/qwiht_agesex_female_edist.png, replace
-graph bar jc_pct jc_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Creation")
+graph bar jc_pct jc_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Creation")
 graph export $plt/qwiht_agesex_male_jcdist.png, replace
-graph bar jc_pct jc_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Creation")
+graph bar jc_pct jc_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Creation")
 graph export $plt/qwiht_agesex_female_jcdist.png, replace
-graph bar jd_pct jd_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Destruction by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Destruction")
+graph bar jd_pct jd_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Destruction by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Destruction")
 graph export $plt/qwiht_agesex_male_jddist.png, replace
-graph bar jd_pct jd_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female Job Destruction by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Destruction")
+graph bar jd_pct jd_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female Job Destruction by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Destruction")
 graph export $plt/qwiht_agesex_female_jddist.png, replace
 
 sort agegrp sex
@@ -385,19 +385,19 @@ gen jc_pct_diff=jc_pct-jc_pct_f
 gen jd_pct_ht_diff=jd_pct_ht-jd_pct_ht_f
 gen jd_pct_diff=jd_pct-jd_pct_f
 
-graph bar e_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("High Tech EoQ Employment Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar e_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("High Tech EoQ Employment Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_edist_diff.png, replace
-graph bar e_pct_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("non-High Tech EoQ Employment Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar e_pct_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("non-High Tech EoQ Employment Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_edist_diff_nonht.png, replace
 
-graph bar jc_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("High Tech Job Creation Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of JC") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar jc_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("High Tech Job Creation Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of JC") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_jcdist_diff.png, replace
-graph bar jc_pct_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("non-High Tech Job Creation Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of JC") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar jc_pct_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("non-High Tech Job Creation Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of JC") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_jcdist_diff_nonht.png, replace
 
-graph bar jd_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("High Tech Job Destruction Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of JD") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar jd_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("High Tech Job Destruction Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of JD") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_jddist_diff.png, replace
-graph bar jd_pct_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("non-High Tech Job Destruction Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of JD") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar jd_pct_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("non-High Tech Job Destruction Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of JD") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_jddist_diff_nonht.png, replace
 
 use `hold', clear
@@ -416,17 +416,17 @@ by sex agegrp: gen jd_pct_ht=jd_pct[_n+1]
 keep if hitech==0
 drop hitech
 
-graph bar e_pct e_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male EoQ Employment by Age Group""Average Percent 1995-2014") ytitle("Percent of EoQ Employment")
+graph bar e_pct e_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male EoQ Employment by Age Group""Average Percent 1995-2015") ytitle("Percent of EoQ Employment")
 graph export $plt/qwiht_agesex_male_edist_midage.png, replace
-graph bar e_pct e_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female EoQ Employment by Age Group""Average Percent 1995-2014") ytitle("Percent of EoQ Employment")
+graph bar e_pct e_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female EoQ Employment by Age Group""Average Percent 1995-2015") ytitle("Percent of EoQ Employment")
 graph export $plt/qwiht_agesex_female_edist_midage.png, replace
-graph bar jc_pct jc_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Creation")
+graph bar jc_pct jc_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Creation")
 graph export $plt/qwiht_agesex_male_jcdist_midage.png, replace
-graph bar jc_pct jc_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Creation")
+graph bar jc_pct jc_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Creation by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Creation")
 graph export $plt/qwiht_agesex_female_jcdist_midage.png, replace
-graph bar jd_pct jd_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Destruction by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Destruction")
+graph bar jd_pct jd_pct_ht if sex==1, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Male Job Destruction by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Destruction")
 graph export $plt/qwiht_agesex_male_jddist_midage.png, replace
-graph bar jd_pct jd_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female Job Destruction by Age Group""Average Percent 1995-2014") ytitle("Percent of Job Destruction")
+graph bar jd_pct jd_pct_ht if sex==2, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Female Job Destruction by Age Group""Average Percent 1995-2015") ytitle("Percent of Job Destruction")
 graph export $plt/qwiht_agesex_female_jddist_midage.png, replace
 
 sort agegrp sex
@@ -438,11 +438,11 @@ gen e_pct_ht_diff=e_pct_ht-e_pct_ht_f
 gen jc_pct_ht_diff=jc_pct_ht-jc_pct_ht_f
 gen jd_pct_ht_diff=jd_pct_ht-jd_pct_ht_f
 
-graph bar e_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("EoQ Employment Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar e_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("EoQ Employment Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_edist_diff_midage.png, replace
-graph bar jc_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Creation Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of JC") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar jc_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Creation Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of JC") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_jcdist_diff_midage.png, replace
-graph bar jd_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Destruction Difference by Age Group""Average Percent 1995-2014") ytitle("Difference in Percent of JD") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
+graph bar jd_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(,angle(horizontal)) b1title("Age Group") title("Job Destruction Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of JD") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_jddist_diff_midage.png, replace
 
 
