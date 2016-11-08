@@ -20,7 +20,8 @@ save `su07'
 
 ** load qwi tabulation
 *insheet using $data/qwiht_us.csv, clear
-insheet using $data/sum_qwi_us_y1998q1.csv, clear
+*insheet using $data/sum_qwi_us_y1998q1.csv, clear
+insheet using $data/sum_qwi_us_y1995q1.csv, clear
 *drop _merge ht
 merge m:1 industry using `su07'
 gen hitech=_merge==3
