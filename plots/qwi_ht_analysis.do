@@ -540,6 +540,7 @@ gen e_pct_ht_diff=e_pct_ht-e_pct_ht_f
 gen jc_pct_ht_diff=jc_pct_ht-jc_pct_ht_f
 gen jd_pct_ht_diff=jd_pct_ht-jd_pct_ht_f
 
+/*
 sort agegrp ts
 by agegrp: gen ediff_ma = (e_pct_ht_diff[_n-1] + e_pct_ht_diff[_n] + e_pct_ht_diff[_n-1])/3
 by agegrp: gen jcdiff_ma = (jc_pct_ht_diff[_n-1] + jc_pct_ht_diff[_n] + jc_pct_ht_diff[_n-1])/3
@@ -553,6 +554,17 @@ by agegrp: gen jddiff_indx=100*(jddiff_ma[_n]-jddiff_ma[1])/jddiff_ma[1]
 
 by agegrp: gen e_pct_ht_indx=100*(e_pct_ht[_n]-e_pct_ht[1])/e_pct_ht[1]
 by agegrp: gen e_pct_ht_f_indx=100*(e_pct_ht_f[_n]-e_pct_ht_f[1])/e_pct_ht_f[1]
+*/
+
+keep if ts>1995
+sort agegrp ts
+by agegrp: gen ediff_indx=100*(e_pct_ht_diff[_n]-e_pct_ht_diff[1])/abs(e_pct_ht_diff[1])
+by agegrp: gen jcdiff_indx=100*(jc_pct_ht_diff[_n]-jc_pct_ht_diff[1])/abs(jc_pct_ht_diff[1])
+by agegrp: gen jddiff_indx=100*(jd_pct_ht_diff[_n]-jd_pct_ht_diff[1])/abs(jd_pct_ht_diff[1])
+
+by agegrp: gen e_pct_ht_indx=100*(e_pct_ht[_n]-e_pct_ht[1])/abs(e_pct_ht[1])
+by agegrp: gen e_pct_ht_f_indx=100*(e_pct_ht_f[_n]-e_pct_ht_f[1])/abs(e_pct_ht_f[1])
+
 
 tw (line e_pct_ht_indx ts if agegrp=="b) 25-34") (line e_pct_ht_f_indx ts if agegrp=="b) 25-34") 
 
@@ -565,13 +577,13 @@ graph export $plt/qwiht_agesex_htshare_sexdiff_jc.png, replace
 tw 	(line jd_pct_ht_diff ts if agegrp=="a) 19-24", lcolor(navy) lwidth(.5)) (line jd_pct_ht_diff ts if agegrp=="b) 25-34", lcolor(maroon) lwidth(.5)) (line jd_pct_ht_diff ts if agegrp=="c) 35-54", lcolor(forest_green) lwidth(.5)) (line jd_pct_ht_diff ts if agegrp=="d) 55-64", lcolor(dkorange) lwidth(.5)) (line jd_pct_ht_diff ts if agegrp=="e) 65-99", lcolor(teal) lwidth(.5)), legend(order(1 "a) 19-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-64" 5 "e) 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white))  
 graph export $plt/qwiht_agesex_htshare_sexdiff_jd.png, replace
 
-tw 	(line ediff_indx ts if agegrp=="a) 19-24", lcolor(navy) lwidth(.5)) (line ediff_indx ts if agegrp=="b) 25-34", lcolor(maroon) lwidth(.5)) (line ediff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) lwidth(.5)) (line ediff_indx ts if agegrp=="d) 55-64", lcolor(dkorange) lwidth(.5)) (line ediff_indx ts if agegrp=="e) 65-99", lcolor(teal) lwidth(.5)), legend(order(1 "a) 19-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-64" 5 "e) 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Share""Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw 	(line ediff_indx ts if agegrp=="a) 19-24", lcolor(navy) lwidth(.5)) (line ediff_indx ts if agegrp=="b) 25-34", lcolor(maroon) lwidth(.5)) (line ediff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) lwidth(.5)) (line ediff_indx ts if agegrp=="d) 55-64", lcolor(dkorange) lwidth(.5)) (line ediff_indx ts if agegrp=="e) 65-99", lcolor(teal) lwidth(.5)), legend(order(1 "a) 19-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-64" 5 "e) 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Share""Male-Female by Age") note("Difference in share calculated as male share minus female share. Indexed to the 1995 value.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_agesex_htshare_sexdiff_eindx.png, replace
 
-tw 	(line jcdiff_indx ts if agegrp=="a) 19-24", lcolor(navy) lwidth(.5)) (line jcdiff_indx ts if agegrp=="b) 25-34", lcolor(maroon) lwidth(.5)) (line jcdiff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) lwidth(.5)) (line jcdiff_indx ts if agegrp=="d) 55-64", lcolor(dkorange) lwidth(.5)) (line jcdiff_indx ts if agegrp=="e) 65-99", lcolor(teal) lwidth(.5)), legend(order(1 "a) 19-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-64" 5 "e) 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Creation Share""Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
+tw 	(line jcdiff_indx ts if agegrp=="a) 19-24", lcolor(navy) lwidth(.5)) (line jcdiff_indx ts if agegrp=="b) 25-34", lcolor(maroon) lwidth(.5)) (line jcdiff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) lwidth(.5)) (line jcdiff_indx ts if agegrp=="d) 55-64", lcolor(dkorange) lwidth(.5)) (line jcdiff_indx ts if agegrp=="e) 65-99", lcolor(teal) lwidth(.5)), legend(order(1 "a) 19-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-64" 5 "e) 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Creation Share""Male-Female by Age") note("Difference in share calculated as male share minus female share. Indexed to the 1995 value.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
 graph export $plt/qwiht_agesex_htshare_sexdiff_jcindx.png, replace
 
-tw 	(line jddiff_indx ts if agegrp=="a) 19-24", lcolor(navy) lwidth(.5)) (line jddiff_indx ts if agegrp=="b) 25-34", lcolor(maroon) lwidth(.5)) (line jddiff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) lwidth(.5)) (line jddiff_indx ts if agegrp=="d) 55-64", lcolor(dkorange) lwidth(.5)) (line jddiff_indx ts if agegrp=="e) 65-99", lcolor(teal) lwidth(.5)), legend(order(1 "a) 19-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-64" 5 "e) 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share""Male-Female by Age") note("Difference in share calculated as male share minus female share.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white))  
+tw 	(line jddiff_indx ts if agegrp=="a) 19-24", lcolor(navy) lwidth(.5)) (line jddiff_indx ts if agegrp=="b) 25-34", lcolor(maroon) lwidth(.5)) (line jddiff_indx ts if agegrp=="c) 35-54", lcolor(forest_green) lwidth(.5)) (line jddiff_indx ts if agegrp=="d) 55-64", lcolor(dkorange) lwidth(.5)) (line jddiff_indx ts if agegrp=="e) 65-99", lcolor(teal) lwidth(.5)), legend(order(1 "a) 19-24" 2 "b) 25-34" 3 "c) 35-54" 4 "d) 55-64" 5 "e) 65-99")) ylabel(,angle(horizontal)) ytitle("Differnce in HT Share (Male-Female)") xtitle("Year") title("Difference in High Tech Job Destruction Share""Male-Female by Age") note("Difference in share calculated as male share minus female share. Indexed to the 1995 value.") yline(0,lcolor(black) lwidth(.5)) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white))  
 graph export $plt/qwiht_agesex_htshare_sexdiff_jdindx.png, replace
 
 
