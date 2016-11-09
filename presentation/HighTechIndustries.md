@@ -5,7 +5,11 @@ date: November 2016
 autosize: true
 
 
-We use the [Quarterly Workforce Indicators](http://lehd.ces.census.gov/data/#qwi) to analyze age and gender differences in employment in high-tech (Hecker,) industries. 
+We use the [Quarterly Workforce Indicators](http://lehd.ces.census.gov/data/#qwi) to analyze age and gender differences in employment in high-tech industries. 
+
+
+
+
 
 Data Construction
 ================= 
@@ -20,6 +24,42 @@ Data
 * Similar results can be obtained using the BLS 2010 listing of STEM occupations. (Goldschlag and Miranda). 
 
 The resulting data is stored in the [data](../data/) directory.
+
+High-tech occupations (SOC 2000)
+=====================
+* computer and mathematical scientists, SOC 15-0000; 
+* engineers, SOC 17–2000; 
+* drafters, engineering, and mapping technicians, SOC 17–3000; 
+* life scientists, SOC 19–1000; 
+* physical scientists, SOC 19–2000; 
+* life, physical, and social science technicians, SOC 19–4000;
+* computer and information systems managers, SOC 11–3020;
+* engineering managers, SOC 11–9040; 
+* natural sciences managers, SOC 11–9120. 
+
+*** 
+Workers in these occupations need an
+in-depth knowledge of the theories and principles of science,
+engineering, and mathematics underlying technology, a knowledge
+generally acquired through specialized post-high school
+education in some field of technology leading up to an award
+ranging from a vocational certificate or an associate’s degree to
+a doctorate. Individuals employed in these occupations are
+collectively referred to as technology-oriented workers ([Hecker, 2005](http://www.bls.gov/opub/mlr/2005/07/art6full.pdf#page=2))
+
+Mapping to industries
+=================
+(this from https://github.com/ngoldschlag/HighTechIndustries)
+
+BLS Industry-Occupation data for several years is used to map occupations into industries. SOC 2000 is crosswalked into SOC 2010. BLS OES data can be found at http://www.bls.gov/oes/tables.htm.
+
+* Level I industries have STEM ratio greater than (or equal to) 5 times the average STEM concentration
+* Level II includes industries with a STEM employment ratio between 3 and 5 times the average
+* Level III includes industries with a STEM employment ratio between 2 and 3 times the average.
+
+## Output data
+* The result of this exercise is in the [data](../data/) folder.
+* Hecker (2005) finds overall about **4.9%** of workers in "technology-oriented occupations."
 
 Data
 =================
@@ -38,6 +78,12 @@ The very preliminary analysis is performed by combining the high-tech indicators
 
 Intriguing Results
 ================= 
+
+QWI data have a higher fraction of employment in high-tech industries 
+**(7.91%**) 
+in 2000 than Hecker (2005), which is to be expected, since Hecker (2005) counts employment only in HT occupations, whereas the BDS and QWI measures capture additional non-HT employment in those same industries.
+
+
 # The Dot-com Bust
 QWI shows a 1 point decline in the overall HT  employment share from the peak in 2001 to 2005. This seems a bit higher (from a higher base) than the equivalent BDS graph (not shown here):
 
@@ -47,7 +93,7 @@ Intriguing Results
 =================
 # Overall churn is lower
 
-The gap between HT and non HT is about 2 points. The gap is about 3-4 points with non-HT consistently higher for both JCR and JDR. 
+The gap is about 3-4 points with non-HT consistently higher for both JCR and JDR. 
 
 Overall churn is lower
 =================
