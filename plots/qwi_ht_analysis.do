@@ -151,7 +151,7 @@ by hitech female: gen e_share_indx=100*(e_share[_n]-e_share[1])/e_share[1]
 by hitech female: gen jc_share_indx=100*(jc_share[_n]-jc_share[1])/jc_share[1]
 by hitech female: gen jd_share_indx=100*(jd_share[_n]-jd_share[1])/jd_share[1]
 
-tw (scatter e_share ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1) yaxis(1)) (scatter e_share ts if hitech==1 & female==1, lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1) yaxis(2)), ytitle("High Tech Share EoQ Employment (Male)",axis(1)) ytitle("High Tech Share EoQ Employment (Female)",axis(2)) xtitle("Year") title("High Tech Share EoQ Employment""Male and Female") legend(order(1 "Male" 2 "Female")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylab(3.6(0.2)4.4,axis(1)) ylab(1.7(0.2)2.5,axis(2))
+tw (scatter e_share ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1) yaxis(1)) (scatter e_share ts if hitech==1 & female==1, lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1) yaxis(2)), ytitle("High Tech Share EoQ Employment (Male)",axis(1)) ytitle("High Tech Share EoQ Employment (Female)",axis(2)) xtitle("Year") title("High Tech Share EoQ Employment""Male and Female") legend(order(1 "Male" 2 "Female")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylab(4.4(0.2)5.2,axis(1)) ylab(2.2(0.2)3.0,axis(2))
 graph export $plt/qwiht_sex_eshare.png, replace
 
 tw (scatter jc_share ts if hitech==1 & female==0, lcolor(navy) mcolor(navy) lwidth(.5) m(circle_hollow) connect(1) msize(1)) (scatter jc_share ts if hitech==1 & female==1, lcolor(maroon) mcolor(maroon) lwidth(.5) m(triangle_hollow) connect(1) msize(1)), ytitle("High Tech Share Job Creation") xtitle("Year") title("High Tech Share Job Creation""Male and Female") legend(order(1 "Male" 2 "Female")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) 
@@ -389,11 +389,17 @@ gen jc_pct_ht_diff=jc_pct_ht-jc_pct_ht_f
 gen jc_pct_diff=jc_pct-jc_pct_f
 gen jd_pct_ht_diff=jd_pct_ht-jd_pct_ht_f
 gen jd_pct_diff=jd_pct-jd_pct_f
+gen e_pct_htnonht_diff = e_pct_ht_diff-e_pct_diff
 
 graph bar e_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("High Tech EoQ Employment Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_edist_diff.png, replace
 graph bar e_pct_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("non-High Tech EoQ Employment Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_edist_diff_nonht.png, replace
+
+graph bar e_pct_htnonht_diff, over(agegrp, label(angle(45))) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("Difference: Male-Female, High Tech-non-High Tech by Age""Average Percent 1995-2015") ytitle("Difference in Percent of EoQ Employment") note("Difference calculated as male share minus female share and High Tech minus non-High Tech. Positive values indicate ") yline(0, lwidth(.5) lcolor(black))
+graph export $plt/qwiht_agesex_male_edist_diff_htnonhtdiff.png, replace
+
+
 
 graph bar jc_pct_ht_diff, over(agegrp, label(angle(45))) legend(order(1 "non-High Tech" 2 "High Tech")) graphregion(fcolor(white)) plotregion(style(none) fcolor(white) lcolor(white)) ylabel(-2(1)2,angle(horizontal)) b1title("Age Group") title("High Tech Job Creation Difference by Age Group""Average Percent 1995-2015") ytitle("Difference in Percent of JC") note("Difference calculated as male share minus female share.") yline(0, lwidth(.5) lcolor(black))
 graph export $plt/qwiht_agesex_male_jcdist_diff.png, replace
