@@ -1,25 +1,19 @@
 ---
-title: "The demographics of high-tech industries"
-author: "Nathan Goldschlag and Lars Vilhuber"
-output:
-  html_document:
-    toc: yes
-    toc_depth: 1
-  pdf_document:
-    keep_tex: yes
-    toc: yes
-    toc_depth: 1
+title: "High-Tech Industries in QWI"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
-Blurb about hightech.
-
 ```{r options, echo=FALSE,warning=FALSE,message=FALSE}
+library(flexdashboard)
 library(gdata)
 library(knitr)
 library(ggplot2)
 htbase <- "../data"
 ```
-
+# Construction
 The QWI files are available by NAICS4 for all states, although the historical availability varies by state. For more details, see [Download_QWI](Download_QWI.html), which should be run prior to this file.
 
 
@@ -38,7 +32,7 @@ qwiht_sum$year <- floor((qwiht_sum$qtime-1)/4) + 1985
 qwiht_sum$quarter <- qwiht_sum$qtime %% 4
 qwiht_sum$date <- as.Date(as.yearqtr(qwiht_sum$year + (qwiht_sum$quarter-1)/4))
 ```
-We compute the job creation and destruction rates:
+We compute the job creation and destruction rates 
 ```{r jcrjdr}
 
 qwiht_sum$eb2 <- ( qwiht_sum$e.sum + qwiht_sum$b.sum )/2
@@ -50,9 +44,7 @@ qwiht_sum$industryht <- "High Tech"
 qwiht_sum[which(qwiht_sum$ht==0),"industryht"] <- "Non-High Tech"
 
 ```
-
-
-and merge on the indicators for HighTech status:
+and merge on the indicators for HighTech status.
 ```{r merge_ht,eval=FALSE}
 ht <- read.csv(paste(htbase,"ht_stem_industries.csv",sep="/"))
 # actually, we've done the merge elsewhere...
@@ -60,8 +52,12 @@ ht <- read.csv(paste(htbase,"ht_stem_industries.csv",sep="/"))
 
 # Results
 
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
 ```{r graph_Emp,echo=FALSE,warning=FALSE,error=FALSE}
-library(ggplot2)
 library(tis)
 
 gg <- ggplot(data=subset(qwiht_sum,sex=="0" & agegrp=="A00"),
@@ -77,3 +73,19 @@ gg + scale_color_brewer(type="qual") +
                limits = as.Date(c("1990-01-01","2016-01-01")))
 
 ```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
